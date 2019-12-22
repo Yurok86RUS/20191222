@@ -10,9 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsMessage;
+import android.util.Log;
+import android.widget.TextView;
 
 public class SmsReceiver extends BroadcastReceiver {
 
+//    private static final String TAG = "myLog";
+//    MainActivity text;
     int messageId = 0;
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -37,8 +41,17 @@ public class SmsReceiver extends BroadcastReceiver {
         for (int i = 1; i < messages.length; i++) {
             body.append(messages[i].getMessageBody());
         }
+//        Log.d(TAG,"сейчас будет делаться бодитекст",null);
+//        Log.d(TAG,"message " + messages, null );
+//        Log.d(TAG,"body " + body, null );
+
         String bodyText = body.toString();
+
+//        Log.d(TAG,"boditext = " + bodyText, null);
+
         makeNote(context, smsFromPhone, bodyText);
+
+//        Log.d(TAG,"уже вызвался makeNote " + bodyText,null);
 // Это будет работать только на Android ниже 4.4
         abortBroadcast();
 
@@ -46,6 +59,10 @@ public class SmsReceiver extends BroadcastReceiver {
 
     // Вывод уведомления в строке состояния
     private void makeNote(Context context, String addressFrom, String message) {
+
+//        Log.d(TAG,"я уже в методе makeNote и тут бодитекст = " + message, null);
+//        Log.d(TAG,"adres = " + addressFrom,null);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "2")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(String.format("Receiver:Sms [%s]", addressFrom))
