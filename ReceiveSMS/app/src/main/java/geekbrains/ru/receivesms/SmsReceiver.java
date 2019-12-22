@@ -10,9 +10,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsMessage;
+import android.util.Log;
+import android.widget.TextView;
 
 public class SmsReceiver extends BroadcastReceiver {
 
+ //   private static final String TAG = "myLog";
+//    MainActivity text;
     int messageId = 0;
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -38,7 +42,11 @@ public class SmsReceiver extends BroadcastReceiver {
             body.append(messages[i].getMessageBody());
         }
         String bodyText = body.toString();
+
+//        text.textView123.setText(bodyText);
+
         makeNote(context, smsFromPhone, bodyText);
+
 // Это будет работать только на Android ниже 4.4
         abortBroadcast();
 
@@ -61,5 +69,6 @@ public class SmsReceiver extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(messageId++, builder.build());
+//        text.setTextView(message);
     }
 }
