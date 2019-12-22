@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +13,9 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-//    public TextView textView123 = findViewById(R.id.text_view_receive_message);
+//    public TextView textViewReceiveMessage = findViewById(R.id.text_view_receive_message);
     String phoneNumber = "6505551212";
+//    private String TAG = "myLog";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String messageSend = editText.getText().toString();
-                SmsManager.getDefault().sendTextMessage(phoneNumber,null,messageSend,null,null);
-//
+                if (messageSend.equals(""))
+                    messageSend = "тут должен быть текст";
+                    SmsManager.getDefault().sendTextMessage(phoneNumber,null,messageSend,null,null);
+
+//                Log.d(TAG,"отправили смс " + messageSend,null);
 //                String number="6505551212";
 //                String message="Привет GeekBrains!";
 //                String toNumberSms="smsto:"+number;
@@ -40,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 //    public void setTextView(String text){
-//        TextView textView = findViewById(R.id.text_view_receive_message);
-//        textView.setText(text);
+//       TextView textViewReceiveMessage = findViewById(R.id.text_view_receive_message);
+//       Log.d(TAG,"хочу написать тут " + text, null);
+//       textViewReceiveMessage.setText(text);
 //    }
 }

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class SmsReceiver extends BroadcastReceiver {
 
- //   private static final String TAG = "myLog";
+//    private static final String TAG = "myLog";
 //    MainActivity text;
     int messageId = 0;
     @Override
@@ -41,12 +41,17 @@ public class SmsReceiver extends BroadcastReceiver {
         for (int i = 1; i < messages.length; i++) {
             body.append(messages[i].getMessageBody());
         }
+//        Log.d(TAG,"сейчас будет делаться бодитекст",null);
+//        Log.d(TAG,"message " + messages, null );
+//        Log.d(TAG,"body " + body, null );
+
         String bodyText = body.toString();
 
-//        text.textView123.setText(bodyText);
+//        Log.d(TAG,"boditext = " + bodyText, null);
 
         makeNote(context, smsFromPhone, bodyText);
 
+//        Log.d(TAG,"уже вызвался makeNote " + bodyText,null);
 // Это будет работать только на Android ниже 4.4
         abortBroadcast();
 
@@ -54,6 +59,10 @@ public class SmsReceiver extends BroadcastReceiver {
 
     // Вывод уведомления в строке состояния
     private void makeNote(Context context, String addressFrom, String message) {
+
+//        Log.d(TAG,"я уже в методе makeNote и тут бодитекст = " + message, null);
+//        Log.d(TAG,"adres = " + addressFrom,null);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "2")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(String.format("Receiver:Sms [%s]", addressFrom))
@@ -69,6 +78,5 @@ public class SmsReceiver extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(messageId++, builder.build());
-//        text.setTextView(message);
     }
 }
